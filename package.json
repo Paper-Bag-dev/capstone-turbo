@@ -1,5 +1,5 @@
 {
-  "name": "my-turborepo",
+  "name": "capstone-main",
   "private": true,
   "scripts": {
     "build": "turbo run build",

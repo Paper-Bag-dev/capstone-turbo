@@ -1,0 +1,20 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 30
+    },
+    "auditLog": "C:\\Users\\vikal\\OneDrive\\Documents\\J progs\\Projects\\capstone-main\\apps\\backend-aggregator\\src\\logs\\devices\\.8712ade8302e4577309e8b3676821efdb9858781-audit.json",
+    "files": [
+        {
+            "date": 1742205378971,
+            "name": "C:\\Users\\vikal\\OneDrive\\Documents\\J progs\\Projects\\capstone-main\\apps\\backend-aggregator\\src\\logs\\devices\\2025-03-17.log",
+            "hash": "36a509c966e5f217f1e2a79b3d5617778312eee2b9b97c940e3b7c4d3418b033"
+        },
+        {
+            "date": 1742278711649,
+            "name": "C:\\Users\\vikal\\OneDrive\\Documents\\J progs\\Projects\\capstone-main\\apps\\backend-aggregator\\src\\logs\\devices\\2025-03-18.log",
+            "hash": "e56192bf642d3c5c2d7776fc69fefa0acfae6a67550b34f026bd92ed422c7745"
+        }
+    ],
+    "hashType": "sha256"
+}

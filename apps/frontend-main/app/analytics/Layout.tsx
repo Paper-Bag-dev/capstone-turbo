@@ -6,7 +6,7 @@ const AnalyticsLayout = ({ children }: { children: ReactNode }) => {
   return (
     <SidebarProvider className="h-screen">
       <AppSidebar />
-      <main>
+      <main className="w-[100%]">
         {children}
       </main>
     </SidebarProvider>

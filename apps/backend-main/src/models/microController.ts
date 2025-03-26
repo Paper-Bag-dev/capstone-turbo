@@ -20,7 +20,7 @@ const microControllerSchema = new Schema<IMicroController>({
   },
   location: {
     id: {
-      type: String,
+      type: Schema.Types.ObjectId,
       required: true,
     },
     name: {

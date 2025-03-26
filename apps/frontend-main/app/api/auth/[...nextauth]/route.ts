@@ -26,10 +26,10 @@ const handler = NextAuth({
           { withCredentials: true }
         );
 
-        console.log("Backend Response:", res.data); // DEBUG
+        console.log("Backend Response:", res.data);
 
         if (res.data.success) {
-          return { id: res.data.user._id, name: res.data.user.name };
+          return { id: res.data.user._id, name: res.data.user.username };
         }
 
         return null;
@@ -57,6 +57,9 @@ const handler = NextAuth({
     strategy: "jwt",
   },
 });
+
+
+
 
 export const GET = handler;
 export const POST = handler;

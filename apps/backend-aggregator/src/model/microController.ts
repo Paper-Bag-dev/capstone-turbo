@@ -1,7 +1,7 @@
 import { Schema, model, Document } from "mongoose";
 
 export interface IMicroController extends Document {
-  deviceId: string;
+  deviceName: string;
   userId: Schema.Types.ObjectId;
   location: {
     id: string;
@@ -9,14 +9,10 @@ export interface IMicroController extends Document {
     latitude: number;
     longitude: number;
   };
-  humidity: number;
-  temperature: number;
-  particlePerMillion: number;
-  timestamp: string;
 }
 
 const microControllerSchema = new Schema<IMicroController>({
-  deviceId: { type: String, required: true, unique: true },
+  deviceName: { type: String, required: true, unique: true },
   userId: {
     type: Schema.Types.ObjectId,
     ref: "User",
@@ -24,7 +20,7 @@ const microControllerSchema = new Schema<IMicroController>({
   },
   location: {
     id: {
-      type: String,
+      type: Schema.Types.ObjectId,
       required: true,
     },
     name: {
@@ -39,7 +35,7 @@ const microControllerSchema = new Schema<IMicroController>({
       type: Number,
       required: false,
     },
-  }
+  },
 });
 
 const MicroControllerModel = model<IMicroController>(

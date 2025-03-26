@@ -7,42 +7,40 @@ import { BarGraph } from "@/components/common/charts/bar-graph";
 import { PieGraph } from "@/components/common/charts/pie-graph";
 import { CalendarDateRangePicker } from "@/components/common/Date/date-range-picker";
 import PageContainer from "@/components/common/layout/page-container";
-// import { RecentSales } from "@/components/recent-sales";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/components/ui/card";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/components/ui/tabs";
-import {
-  CircleDotDashed,
-  CpuIcon,
-  DropletIcon,
-  ThermometerSun,
-} from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/components/ui/tabs";
+import { CircleDotDashed, CpuIcon, DropletIcon, MapPin, MapPinIcon, ThermometerSun } from "lucide-react";
 import { humidity, ppm, temp } from "../../utils/dataTypes";
 import CustomCard from "@/components/common/CustomCard";
 import CustomChat from "@/components/common/CustomChat";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import AddDevicePopup from "@/components/common/modals/AddDevice";
+import { useSession } from "next-auth/react";
+import AddLocationPopup from "@/components/common/modals/AddLocation";
 
 const Dashboard = () => {
-  // use session to validate user
   const [humidity, setHumidity] = useState<humidity[]>([]);
   const [temp, setTemp] = useState<temp[]>([]);
   const [ppm, setPpm] = useState<ppm[]>([]);
   const [user, setUser] = useState<string>("User");
+  const [locRefresh, setLocRefresh] = useState<boolean>(false);
+
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const show = searchParams.get("show");
+  const loc = searchParams.get("loc");
   const router = useRouter();
+
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      console.log("User not logged in!");
+      router.push("/api/auth/signin");
+    } else if (session?.user?.name) {
+      setUser(session.user.name);
+    }
+  }, [status, session, router]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -52,13 +50,24 @@ const Dashboard = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  if (status === "loading") {
+    return <p>Loading...</p>; // Avoid rendering UI until session loads
+  }
 
   return (
     <>
       <AddDevicePopup
         show={show}
+        refresh={locRefresh}
         backFn={() => {
           router.push(`${pathname}/?show=false`);
+        }}
+      />
+      <AddLocationPopup
+        show={loc}
+        setLocRefresh={setLocRefresh}
+        backFn={() => {
+          router.push(`${pathname}/?loc=false`);
         }}
       />
       <DashboardLayout>
@@ -66,13 +75,20 @@ const Dashboard = () => {
           <div className="space-y-2">
             <div className="flex items-center justify-between space-y-2">
               <h2 className="text-2xl font-bold tracking-tight">
-                {/* Add a user name parser here */}
-                Hi, Welcome back {user}👋
+                Hi, Welcome back {user} 👋
               </h2>
 
-              {/* Allow user to set data range and add devices */}
-              <div className="items-center hidden space-x-2 md:flex">
-                <CalendarDateRangePicker />
+              <div className="items-center hidden pr-3 space-x-2 md:flex">
+                {/* <CalendarDateRangePicker /> */}
+                <Button
+                  className="text-white bg-black hover:bg-accent"
+                  onClick={() => {
+                    router.push(`${pathname}/?loc=true`);
+                  }}
+                >
+                  <MapPinIcon /> 
+                </Button>
+
                 <Button
                   onClick={() => {
                     router.push(`${pathname}/?show=true`);
@@ -87,9 +103,7 @@ const Dashboard = () => {
                 <CustomCard
                   title="Humidity"
                   desc="Relative Humidity (RH)"
-                  icon={
-                    <DropletIcon className="font-bold w-7 h-7 text-primary" />
-                  }
+                  icon={<DropletIcon className="font-bold w-7 h-7 text-primary" />}
                   val="90.32 %"
                   footer="measures humidity aggregation"
                 />

@@ -1,6 +1,7 @@
 import express from "express";
 import signRouter from "./routes/auth"
 import deviceRouter from "./routes/device"
+import locationRouter from "./routes/location"
 
 const router = express.Router();
 
@@ -9,6 +10,7 @@ router.get("/", (req, res) => {
 });
 
 router.use("/auth", signRouter);
-router.use("/device", deviceRouter);
+router.use("/device", deviceRouter); 
+router.use("/location", locationRouter); 
 
 export default router;

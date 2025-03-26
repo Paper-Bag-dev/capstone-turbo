@@ -4,7 +4,7 @@ import { connectDB } from "./db/connect";
 import MicroControllerModel from "./model/microController";
 import { logUnregisteredDevice } from "./utils/logger";
 import DeviceModel from "./model/deviceModel";
-import cors from "cors"
+import cors from "cors";
 
 const app = express();
 app.use(express.json());

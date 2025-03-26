@@ -1,8 +1,8 @@
 "use client"
 
 import { TrendingUp } from "lucide-react"
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
-
+import { useState } from "react"
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from "recharts"
 import {
   Card,
   CardContent,
@@ -11,61 +11,42 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/components/ui/card"
-import {
-  ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/components/ui/chart"
-const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
-  { month: "June", desktop: 214, mobile: 140 },
-  { month: "June", desktop: 214, mobile: 140 },
-  { month: "June", desktop: 214, mobile: 140 },
-  { month: "June", desktop: 214, mobile: 140 },
-  { month: "June", desktop: 214, mobile: 140 },
+import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/components/ui/chart"
+
+const initialData = [
+  { day: "2024-03-20", humidity: 60, temp: 30, ppm: 400 },
+  { day: "2024-03-21", humidity: 65, temp: 28, ppm: 420 },
+  { day: "2024-03-22", humidity: 70, temp: 32, ppm: 410 },
+  { day: "2024-03-23", humidity: 75, temp: 29, ppm: 430 },
+  { day: "2024-03-24", humidity: 68, temp: 31, ppm: 415 },
 ]
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "var(--chart-1)",
-  },
-  mobile: {
-    label: "Mobile",
-    color: "var(--chart-2)",
-  },
+  humidity: { label: "Humidity", color: "var(--chart-1)" },
+  temp: { label: "Temperature", color: "var(--chart-2)" },
+  ppm: { label: "PPM", color: "var(--chart-3)" },
 } satisfies ChartConfig
 
 export function BarGraph() {
+  const [data, setData] = useState(initialData)
+  
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>Bar Chart - Multiple</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>Environmental Data</CardTitle>
+        <CardDescription>Select a date range to filter data</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
-          <BarChart accessibilityLayer data={chartData}>
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="month"
-              tickLine={false}
-              tickMargin={10}
-              axisLine={false}
-              tickFormatter={(value) => value.slice(0, 3)}
-            />
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent indicator="dashed" />}
-            />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-            <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
+          <BarChart data={data} width={600} height={300}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="day" tickFormatter={(value) => value.slice(5)} />
+            <YAxis />
+            <Tooltip content={<ChartTooltipContent indicator="dashed" />} />
+            <Legend />
+            <Bar dataKey="humidity" fill="var(--chart-1)" radius={4} />
+            <Bar dataKey="temp" fill="var(--chart-2)" radius={4} />
+            <Bar dataKey="ppm" fill="var(--chart-3)" radius={4} />
           </BarChart>
         </ChartContainer>
       </CardContent>
@@ -74,7 +55,7 @@ export function BarGraph() {
           Trending up by 5.2% this month <TrendingUp className="w-4 h-4" />
         </div>
         <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
+          Showing environmental readings for selected days
         </div>
       </CardFooter>
     </Card>

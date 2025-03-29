@@ -52,6 +52,8 @@ app.post("/hook/v1/data", async (req, res) => {
   }
 });
 
+const PORT = process.env.PORT || 5001;
+
 const initWebHook = async () => {
   await connectDB(process.env.MONGO_URI as string)
     .then(() => {
@@ -59,8 +61,8 @@ const initWebHook = async () => {
         res.send("Hello World!");
       });
 
-      app.listen(process.env.PORT, () => {
-        console.log("Server Listening on Port: ", process.env.PORT);
+      app.listen(PORT, () => {
+        console.log("Server Listening on Port: ", PORT);
       });
     })
     .catch((err) => {

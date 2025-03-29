@@ -1,0 +1,1 @@
+{"root":["./src/index.ts","./src/db/connect.ts","./src/model/analytics.ts","./src/model/devicemodel.ts","./src/model/microcontroller.ts","./src/utils/createtimeseries.ts","./src/utils/logger.ts"],"version":"5.8.2"}

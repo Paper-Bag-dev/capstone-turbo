@@ -1,12 +1,16 @@
 "use client";
 import { useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
 const SignUp = () => {
   const router = useRouter();
-  const [formData, setFormData] = useState({ username: "", email: "", password: "" });
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -20,13 +24,22 @@ const SignUp = () => {
     setError("");
 
     try {
-      const res = await axios.post("http://localhost:5000/api/v1/auth/signup", formData);
+      const res = await axios.post(
+        "http://localhost:5000/api/v1/auth/signup",
+        formData
+      );
       if (res.status === 201) {
         // Redirect to NextAuth sign-in page
         router.push("/api/auth/signin");
-      } 
-    } catch (err: any) {
-      setError(err.response?.data?.message || "Signup failed. Try again!");
+      }
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        setError(err.response?.data?.message || "Signup failed. Try again!");
+      } else if (err instanceof Error) {
+        setError(err.message || "An unexpected error occurred.");
+      } else {
+        setError("An unknown error occurred.");
+      }
     } finally {
       setLoading(false);
     }
@@ -103,4 +116,3 @@ const SignUp = () => {
 };
 
 export default SignUp;
-  

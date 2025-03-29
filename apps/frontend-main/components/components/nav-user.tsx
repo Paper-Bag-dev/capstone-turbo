@@ -1,10 +1,7 @@
 "use client";
 
 import {
-  BadgeCheck,
-  Bell,
   ChevronsUpDown,
-  CreditCard,
   LogOut,
   Sparkles,
 } from "lucide-react";
@@ -29,7 +26,6 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/components/ui/sidebar";
-import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 
 export function NavUser({

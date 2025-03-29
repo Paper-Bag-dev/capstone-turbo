@@ -86,7 +86,7 @@ const Report = () => {
       }
     };
     fetchBaseData();
-  }, [session?.user.id]);
+  }, [session]);
   return (
     <ReportLayout>
       <PageContainer scrollable={true}>

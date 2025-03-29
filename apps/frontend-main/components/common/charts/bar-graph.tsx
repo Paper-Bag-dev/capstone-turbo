@@ -1,7 +1,5 @@
 "use client";
 
-import { TrendingUp } from "lucide-react";
-import { useState } from "react";
 import {
   Bar,
   BarChart,

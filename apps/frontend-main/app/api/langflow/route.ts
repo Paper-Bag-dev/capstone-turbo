@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 export async function POST(req: Request) {
   console.log("Bearer call Called: ", process.env.LANGFLOW_TOKEN);
@@ -24,11 +24,12 @@ export async function POST(req: Request) {
     );
 
     return NextResponse.json(langflowRes.data, { status: 200 });
-  } catch (error: any) {
-    console.error("Langflow API Error:", error.response?.data || error.message);
+  } catch (error) {
+    const axiosError = error as AxiosError;
+    console.error("Langflow API Error:", axiosError.response?.data || axiosError.message);
     return NextResponse.json(
-      { error: error.response?.data || "Internal Server Error" },
-      { status: error.response?.status || 500 }
+      { error: axiosError.response?.data || "Internal Server Error" },
+      { status: axiosError.response?.status || 500 }
     );
   }
 }

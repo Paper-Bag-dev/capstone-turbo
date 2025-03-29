@@ -58,7 +58,7 @@ const Analytics = () => {
   const [temp, setTemp] = useState(0);
   const [ppm, setPpm] = useState(0);
   const [devices, setDevices] = useState<Device[]>();
-  const [data, setData] = useState();
+  // const [data, setData] = useState();
   const [humidityData, setHumidityData] = useState<[]>([]);
   const [ppmData, setPpmData] = useState<[]>([]);
   const [temperatureData, setTemperatureData] = useState<[]>([]);
@@ -95,20 +95,19 @@ const Analytics = () => {
           { userId: session?.user.id }
         );
         const rawData = response.data.data;
-
-        setData(rawData);
+        type rawDataType = typeof rawData;
         // Process the data
-        const humidity = rawData.map((entry: any) => ({
+        const humidity = rawData.map((entry: rawDataType) => ({
           date: entry.date,
           minHumidity: entry.minHumidity,
           maxHumidity: entry.maxHumidity,
         }));
-        const ppm = rawData.map((entry: any) => ({
+        const ppm = rawData.map((entry: rawDataType) => ({
           date: entry.date,
           minPPM: entry.minPPM,
           maxPPM: entry.maxPPM,
         }));
-        const temperature = rawData.map((entry: any) => ({
+        const temperature = rawData.map((entry: rawDataType) => ({
           date: entry.date,
           minTemperature: entry.minTemperature,
           maxTemperature: entry.maxTemperature,

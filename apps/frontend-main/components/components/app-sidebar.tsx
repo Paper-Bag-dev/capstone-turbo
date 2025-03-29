@@ -1,8 +1,6 @@
 import {
-  Calendar,
   Home,
   Cpu,
-  Settings,
   ChartColumnDecreasingIcon,
   BotMessageSquare,
   FileIcon,

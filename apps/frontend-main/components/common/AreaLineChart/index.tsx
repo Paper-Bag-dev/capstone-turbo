@@ -1,6 +1,5 @@
 "use client";
-
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { TrendingUp } from "lucide-react";
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts";
@@ -229,7 +228,7 @@ export function AreaChartLine({ deviceId }: { deviceId: string }) {
     };
 
     fetchData();
-  }, [date, setDate]);
+  }, [date, setDate, deviceId]);
 
   return (
     <Card className="w-[48rem]">

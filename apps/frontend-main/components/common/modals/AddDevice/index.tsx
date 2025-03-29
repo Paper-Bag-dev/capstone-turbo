@@ -34,8 +34,9 @@ const AddDevicePopup = ({ show, refresh, backFn = () => {} }: SearchParamProps) 
   >([]);
 
   const { data: session } = useSession();
-
   const getLocations = async () => {
+    if(!session?.user.id)
+      return;
     try {
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/location/get-location`,
@@ -55,10 +56,14 @@ const AddDevicePopup = ({ show, refresh, backFn = () => {} }: SearchParamProps) 
   };
 
   useEffect(() => {
+    const fetchData = async () => {
+      await getLocations();
+    };
+    
     if (session?.user.id) {
-      getLocations();
+      fetchData();
     }
-  }, [session?.user.id, refresh]);
+  }, [refresh]);
 
   const handleSubmit = async () => {
     if (!deviceName || !locationName || !location) {
@@ -154,7 +159,7 @@ const AddDevicePopup = ({ show, refresh, backFn = () => {} }: SearchParamProps) 
                   <DropdownMenuContent className="w-[22rem]">
                     <DropdownMenuLabel>Added Locations</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    {locList.map((item, ind) => (
+                    {locList.map((item) => (
                       <DropdownMenuItem
                         key={item._id} // Fix: Use `_id` as key
                         onClick={() => {

@@ -7,7 +7,7 @@ const Home = () => {
 
   useEffect(() => {
     router.push('/dashboard')
-  }, [])
+  }, [router])
   return (
     <>
     </>

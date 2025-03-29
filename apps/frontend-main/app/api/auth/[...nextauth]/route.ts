@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google";
+// import GoogleProvider from "next-auth/providers/google";
 import axios from "axios";
 
 // login with password / email | login with google
@@ -16,7 +16,7 @@ const handler = NextAuth({
           placeholder: "password",
         },
       },
-      async authorize(credentials: any) {
+      async authorize(credentials) {
         const res = await axios.post(
           `${process.env.BACKEND_URL}/api/v1/auth/signin`,
           {
@@ -34,11 +34,7 @@ const handler = NextAuth({
 
         return null;
       },
-    }),
-    GoogleProvider({
-      clientId: process.env.GOOGLE_ID || "",
-      clientSecret: process.env.GOOGLE_SECRET || "",
-    }),
+    })
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
@@ -57,9 +53,6 @@ const handler = NextAuth({
     strategy: "jwt",
   },
 });
-
-
-
 
 export const GET = handler;
 export const POST = handler;

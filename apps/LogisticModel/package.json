@@ -1,0 +1,14 @@
+{
+  "name": "logisticmodel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "python train.py",
+    "start": "flask run --host=0.0.0.0 --port=5000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

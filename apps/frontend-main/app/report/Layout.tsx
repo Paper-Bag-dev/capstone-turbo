@@ -2,7 +2,7 @@ import { AppSidebar } from "@/components/components/app-sidebar";
 import { SidebarProvider } from "@/components/components/ui/sidebar";
 import React, { ReactNode } from "react";
 
-const AnalyticsLayout = ({ children }: { children: ReactNode }) => {
+const ReportLayout = ({ children }: { children: ReactNode }) => {
   return (
     <SidebarProvider className="h-screen">
       <AppSidebar />
@@ -13,4 +13,4 @@ const AnalyticsLayout = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default AnalyticsLayout;
+export default ReportLayout;

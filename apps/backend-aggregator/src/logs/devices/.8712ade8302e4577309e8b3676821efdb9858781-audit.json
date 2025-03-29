@@ -19,6 +19,16 @@
             "date": 1742793295027,
             "name": "C:\\Users\\vikal\\OneDrive\\Documents\\J progs\\Projects\\capstone-main\\apps\\backend-aggregator\\src\\logs\\devices\\2025-03-24.log",
             "hash": "d1695f3b7a40edd1a43bb6e81341720c411a8c534ebb6d6685cb436609364a4d"
+        },
+        {
+            "date": 1743136663508,
+            "name": "C:\\Users\\vikal\\OneDrive\\Documents\\J progs\\Projects\\capstone-main\\apps\\backend-aggregator\\src\\logs\\devices\\2025-03-28.log",
+            "hash": "26b7e36d65db33bcc3383d419fd41a1bc4023ca5d308615990deec6b57e49b61"
+        },
+        {
+            "date": 1743227930887,
+            "name": "C:\\Users\\vikal\\OneDrive\\Documents\\J progs\\Projects\\capstone-main\\apps\\backend-aggregator\\src\\logs\\devices\\2025-03-29.log",
+            "hash": "c4027ee4ed4eea958240dd270e3f61c055f3c028b882dcb890419a103acf4c60"
         }
     ],
     "hashType": "sha256"

@@ -5,6 +5,7 @@ import {
   Settings,
   ChartColumnDecreasingIcon,
   BotMessageSquare,
+  FileIcon,
 } from "lucide-react";
 import {
   Sidebar,
@@ -43,9 +44,9 @@ const items = [
     icon: BotMessageSquare,
   },
   {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
+    title: "Report",
+    url: "/report",
+    icon: FileIcon,
   },
 ];
 
@@ -56,7 +57,7 @@ export function AppSidebar() {
         <NavUser
           user={{
             name: "Lichen Works",
-            email: "vikalpsh1234@gmail.com",
+            email: "lichen.works@gmail.com",
             avatar: "lol",
           }}
         />

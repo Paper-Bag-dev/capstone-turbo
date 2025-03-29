@@ -2,26 +2,34 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/components/ui/button";
 import DashboardLayout from "./Layout";
-import { AreaGraph } from "@/components/common/charts/area-graph";
 import { BarGraph } from "@/components/common/charts/bar-graph";
 import { PieGraph } from "@/components/common/charts/pie-graph";
-import { CalendarDateRangePicker } from "@/components/common/Date/date-range-picker";
 import PageContainer from "@/components/common/layout/page-container";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/components/ui/tabs";
-import { CircleDotDashed, CpuIcon, DropletIcon, MapPin, MapPinIcon, ThermometerSun } from "lucide-react";
-import { humidity, ppm, temp } from "../../utils/dataTypes";
+import {
+  CircleDotDashed,
+  CpuIcon,
+  DropletIcon,
+  MapPinIcon,
+  ThermometerSun,
+} from "lucide-react";
 import CustomCard from "@/components/common/CustomCard";
 import CustomChat from "@/components/common/CustomChat";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import AddDevicePopup from "@/components/common/modals/AddDevice";
 import { useSession } from "next-auth/react";
 import AddLocationPopup from "@/components/common/modals/AddLocation";
+import { ChartConfig } from "@/components/components/ui/chart";
+
+const chartConfig = {
+  humidity: { label: "Humidity", color: "var(--chart-1)" },
+  temp: { label: "Temperature", color: "var(--chart-2)" },
+  ppm: { label: "PPM", color: "var(--chart-3)" },
+} satisfies ChartConfig;
 
 const Dashboard = () => {
-  const [humidity, setHumidity] = useState<humidity[]>([]);
-  const [temp, setTemp] = useState<temp[]>([]);
-  const [ppm, setPpm] = useState<ppm[]>([]);
+  const [humidity, setHumidity] = useState(0);
+  const [temp, setTemp] = useState(0);
+  const [ppm, setPpm] = useState(0);
   const [user, setUser] = useState<string>("User");
   const [locRefresh, setLocRefresh] = useState<boolean>(false);
 
@@ -50,9 +58,29 @@ const Dashboard = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  useEffect(() => {
+    if (!session) return;
+
+    const eventSource = new EventSource(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/v1/events/live-agg?userId=${session.user.id}`);
+
+    eventSource.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      setHumidity(data.avgHumidity.toFixed(3));
+      setTemp(data.avgTemperature.toFixed(1));
+      setPpm(data.avgPPM);  
+    };
+
+    eventSource.onerror = () => {
+      eventSource.close();
+    };
+
+    return () => eventSource.close();
+  }, [session, status]);
+
   if (status === "loading") {
-    return <p>Loading...</p>; // Avoid rendering UI until session loads
+    return <p>Loading...</p>;
   }
+
 
   return (
     <>
@@ -86,7 +114,7 @@ const Dashboard = () => {
                     router.push(`${pathname}/?loc=true`);
                   }}
                 >
-                  <MapPinIcon /> 
+                  <MapPinIcon />
                 </Button>
 
                 <Button
@@ -103,28 +131,30 @@ const Dashboard = () => {
                 <CustomCard
                   title="Humidity"
                   desc="Relative Humidity (RH)"
-                  icon={<DropletIcon className="font-bold w-7 h-7 text-primary" />}
-                  val="90.32 %"
+                  icon={
+                    <DropletIcon className="font-bold w-7 h-7 text-primary" />
+                  }
+                  val={`${humidity} %`}
                   footer="measures humidity aggregation"
                 />
                 <CustomCard
                   title="Temperature"
                   desc="Celcius"
                   icon={<ThermometerSun className="w-7 h-7 text-temp" />}
-                  val={`32 \u00b0 C`}
+                  val={`${temp} \u00b0 C`}
                   footer={`0 \u00b0 C to 50 \u00b0 C`}
                 />
                 <CustomCard
                   title="PPM"
                   desc="Particles Per Million (PPM)"
                   icon={<CircleDotDashed className="text-blue-400" />}
-                  val="200 PPM"
+                  val={`${ppm} PPM`}
                   footer="sensor PPM live values"
                 />
               </div>
 
               <div className="flex col-span-2 row-start-2 py-3">
-                <BarGraph />
+                <BarGraph data={[]} chartConfig={chartConfig} />
               </div>
 
               <div className="flex items-center justify-center col-start-3 px-[0.3rem] ml-1 py-3">

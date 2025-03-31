@@ -33,3 +33,6 @@ const addDevice = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 export default addDevice;
+
+
+//~~~ The location Id got mapped to userID from frontend!!!!! ~~~ 

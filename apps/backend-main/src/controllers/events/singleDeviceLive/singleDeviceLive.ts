@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import mongoose from "mongoose";
 import DeviceModel from "../../../models/deviceModel";
+import MicroControllerModel from "../../../models/microController";
 
 export const singleDeviceLive = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -11,6 +12,16 @@ export const singleDeviceLive = async (req: Request, res: Response, next: NextFu
       return;
     }
 
+    const device = await MicroControllerModel.findById(deviceId);
+
+    if(!device){
+      res.status(400).json({
+        status: false,
+        message: "Device Doesn't exist!",
+      })
+      return;
+    }
+    
     res.setHeader("Content-Type", "text/event-stream");
     res.setHeader("Cache-Control", "no-cache");
     res.setHeader("Connection", "keep-alive");
@@ -18,10 +29,10 @@ export const singleDeviceLive = async (req: Request, res: Response, next: NextFu
 
     // Function to fetch and send the latest data
     const sendLatestData = async () => {
-      const latestData = await DeviceModel.findOne({ deviceId })
+      const latestData = await DeviceModel.findOne({ deviceName: device.deviceName })
         .sort({ timestamp: -1 }) // Get the most recent data
         .lean();
-
+      
       if (latestData) {
         const { temperature, humidity, particlePerMillion } = latestData;
         const data = { temperature, humidity, ppm: particlePerMillion };

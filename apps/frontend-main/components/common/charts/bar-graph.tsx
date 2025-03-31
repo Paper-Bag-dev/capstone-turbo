@@ -37,7 +37,7 @@ const initialData = [
 //   ppm: { label: "PPM", color: "var(--chart-3)" },
 // } satisfies ChartConfig;
 
-export function BarGraph({title = "Environmental Data", desc = "Select a date range to filter data",data = [], chartConfig} : {title?: string, desc?: string, data: [], chartConfig: ChartConfig}) {
+export function BarGraph({title = "Environmental Data", desc = "Select a date range to filter data",data, chartConfig} : {title?: string, desc?: string, data: Object[], chartConfig: ChartConfig}) {
   return (
     <Card className="w-full">
       <CardHeader>

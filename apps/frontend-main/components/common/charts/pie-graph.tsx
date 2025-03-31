@@ -92,7 +92,7 @@ export function PieGraph() {
   React.useEffect(() => {
     const fetchLLMData = async (features: number[]) => {
       try {
-        const response = await axios.post("http://15.206.210.191:5000/plantgpt/predict", {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_LLM_URL}/plantgpt/predict`, {
           features,
         });
   

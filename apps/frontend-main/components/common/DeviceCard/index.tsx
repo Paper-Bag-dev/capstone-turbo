@@ -31,6 +31,7 @@ const DeviceCard = ({ id, title, desc, icon }: Props) => {
         setTemperature(data.temperature);
         setHumidity(data.humidity);
         setPPM(data.ppm);
+
       } catch (error) {
         console.error("Error parsing SSE data:", error);
       }

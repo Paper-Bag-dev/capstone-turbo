@@ -13,7 +13,7 @@ config({
 const app = express();
 
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: [process.env.FRONTEND_URL as string],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }));
@@ -22,6 +22,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/api/v1', router);
 
+const PORT = process.env.PORT || 5000;
+
 const initServer =  async () => {
     await connectDB(process.env.MONGO_URI as string)
     .then(() => {
@@ -29,8 +31,8 @@ const initServer =  async () => {
             res.send("Hello World!");
         });
 
-        app.listen(process.env.PORT, () => {
-            console.log("Server Listening on Port: ", process.env.PORT);
+        app.listen(PORT, () => {
+            console.log("Server Listening on Port: ", PORT);
         })
     })
     .catch((err) => {

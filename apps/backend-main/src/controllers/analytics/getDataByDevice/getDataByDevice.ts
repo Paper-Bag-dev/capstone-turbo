@@ -1,13 +1,22 @@
 import { NextFunction, Request, Response } from "express";
 import DeviceModel from "../../../models/deviceModel";
 import { Types } from "mongoose";
+import MicroControllerModel from "../../../models/microController";
 
-export const getDataByDevice = async (req: Request, res: Response, next: NextFunction) => {
+export const getDataByDevice = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { deviceId, startDate, endDate } = req.body;
 
     if (!deviceId || !startDate || !endDate) {
-      res.status(400).json({ success: false, message: "Missing required parameters", data: [] });
+      res.status(400).json({
+        success: false,
+        message: "Missing required parameters",
+        data: [],
+      });
       return;
     }
 
@@ -15,16 +24,28 @@ export const getDataByDevice = async (req: Request, res: Response, next: NextFun
     const end = new Date(endDate);
 
     if (isNaN(start.getTime()) || isNaN(end.getTime()) || start > end) {
-      res.status(400).json({ success: false, message: "Invalid date range", data: [] });
+      res
+        .status(400)
+        .json({ success: false, message: "Invalid date range", data: [] });
+      return;
+    }
+
+    const microController = await MicroControllerModel.findById(deviceId);
+
+    if (!microController) {
+      res.status(400).json({
+        status: false,
+        message: "Device Doesnt exist!",
+      });
       return;
     }
 
     const deviceData = await DeviceModel.find({
-      microControllerId: new Types.ObjectId(String(deviceId)),
-      timestamp: { $gte: start, $lte: end },
-    }).sort({ timestamp: 1 });
+      deviceName: microController.deviceName,
+    });
 
     // Ensure data is always an array
+
     const timeSeriesData = deviceData.map((device) => ({
       timestamp: device.timestamp,
       humidity: device.humidity,

@@ -11,7 +11,7 @@ export interface IDeviceModel extends Document {
 }
 
 const deviceModelSchema = new Schema<IDeviceModel>({
-  deviceName: { type: String, required: true, unique: true },
+  deviceName: { type: String, required: true, unique: false },
   userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
   microControllerId: { type: Schema.Types.ObjectId, ref: "microController", required: true },
   humidity: { type: Number, required: true },

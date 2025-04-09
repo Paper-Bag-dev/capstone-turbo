@@ -118,6 +118,7 @@ We wanted to go beyond traditional academic projects. The goal: build a **simple
 - 📈 Regression Model for VOC Estimation
 
 **Infrastructure:**
+- 🌐 Docker & DockerHub
 - 🐳 Docker & DockerHub
 - ☁️ AWS EC2 & GCP Compute Engine
 

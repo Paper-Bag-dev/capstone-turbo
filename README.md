@@ -44,6 +44,7 @@ We wanted to go beyond traditional academic projects. The goal: build a **simple
 5. Data will now stream to your dashboard in real-time!
 
 **Note:** Change the necessary components in the ino script mentioned by the comment involving wifi creds, deviceName and webhook url to actually test it in production.
+
 ---
 
 ## 🧠 Key Features

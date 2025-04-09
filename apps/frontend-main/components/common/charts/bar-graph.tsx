@@ -24,11 +24,11 @@ import {
 } from "@/components/components/ui/chart";
 
 const initialData = [
-  { day: "2024-03-20", humidity: 60, temp: 30, ppm: 400 },
-  { day: "2024-03-21", humidity: 65, temp: 28, ppm: 420 },
-  { day: "2024-03-22", humidity: 70, temp: 32, ppm: 410 },
-  { day: "2024-03-23", humidity: 75, temp: 29, ppm: 430 },
-  { day: "2024-03-24", humidity: 68, temp: 31, ppm: 415 },
+  { day: "2025-03-20", humidity: 60, temp: 30, ppm: 400 },
+  { day: "2025-03-21", humidity: 65, temp: 28, ppm: 420 },
+  { day: "2025-03-22", humidity: 70, temp: 32, ppm: 410 },
+  { day: "2025-03-23", humidity: 75, temp: 29, ppm: 430 },
+  { day: "2025-03-24", humidity: 68, temp: 31, ppm: 415 },
 ];
 
 // const chartConfig = {
@@ -38,6 +38,7 @@ const initialData = [
 // } satisfies ChartConfig;
 
 export function BarGraph({title = "Environmental Data", desc = "Select a date range to filter data",data, chartConfig} : {title?: string, desc?: string, data: Object[], chartConfig: ChartConfig}) {
+  console.log("data", data);
   return (
     <Card className="w-full">
       <CardHeader>

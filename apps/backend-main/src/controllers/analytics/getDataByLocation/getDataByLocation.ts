@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import DeviceModel from "../../../models/deviceModel";
 import { Types } from "mongoose";
 import MicroControllerModel from "../../../models/microController";
+import LocationModel from "../../../models/location";
 
 export const getDataByLocation = async (
   req: Request,
@@ -9,10 +10,21 @@ export const getDataByLocation = async (
   next: NextFunction
 ) => {
   try {
-    const { locationId } = req.body;
+    const { userId } = req.body;
+
+    console.log("user: ", userId);
+    const location = await LocationModel.findOne({userId: new Types.ObjectId(String(userId))});
+
+    if(!location){
+      res.status(404).json({
+        status: false,
+        message: "No Location Found"
+      });
+      return;
+    }
 
     const microcontrollers = await MicroControllerModel.find({
-      "location.id": new Types.ObjectId(String(locationId)),
+      "location.id": new Types.ObjectId(String(location._id)),
     });
 
     const microcontrollerIds = microcontrollers.map((mc) => mc._id);

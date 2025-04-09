@@ -27,9 +27,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 const Dashboard = () => {
-  const [humidityData, setHumidityData] = useState<[]>([]);
-  const [ppmData, setPpmData] = useState<[]>([]);
-  const [temperatureData, setTemperatureData] = useState<[]>([]);
+  const [formattedData, setFormattedData] = useState<[]>([]);
   const [humidity, setHumidity] = useState(0);
   const [temp, setTemp] = useState(0);
   const [ppm, setPpm] = useState(0);
@@ -95,24 +93,14 @@ const Dashboard = () => {
           return;
         }
 
-        const humidity = rawData.map((entry: any) => ({
-          date: entry.date,
-          avgHumidity: entry.avgHumidity,
+        const formattedData = rawData.map((entry: any) => ({
+          day: entry.date,
+          humidity: entry.avgHumidity,
+          temp: entry.avgTemperature,
+          ppm: entry.avgPPM,
         }));
-
-        const ppm = rawData.map((entry: any) => ({
-          date: entry.date,
-          avgPPM: entry.avgPPM,
-        }));
-
-        const temperature = rawData.map((entry: any) => ({
-          date: entry.date,
-          avgTemperature: entry.avgTemperature,
-        }));
-
-        setHumidityData(humidity);
-        setPpmData(ppm);
-        setTemperatureData(temperature);
+        
+        setFormattedData(formattedData);
       } catch (error) {
         console.error("Error fetching base data", error);
       }
@@ -189,7 +177,7 @@ const Dashboard = () => {
               </div>
 
               <div className="flex col-span-2 row-start-2 py-3">
-                <BarGraph data={[]} chartConfig={chartConfig} />
+                <BarGraph data={formattedData} chartConfig={chartConfig} />
               </div>
 
               <div className="flex items-center justify-center col-start-3 px-[0.3rem] ml-1 py-3">

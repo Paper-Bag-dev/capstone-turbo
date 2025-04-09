@@ -37,12 +37,13 @@ We wanted to go beyond traditional academic projects. The goal: build a **simple
 
 ### 📡 Connecting Hardware:
 
-1. Flash the `ESP32_Script.ino` (or customized version) using the Arduino IDE or ESP toolchain.
+1. Flash the `ESP32Script.ino` (or customized version) using the Arduino IDE or ESP toolchain.
 2. Update the webhook URL in the script with your hosted `backend-aggregator` endpoint (via Ngrok or live server).
 3. Match your `deviceName` in the script with a registered device in the frontend.
 4. Upload and start your ESP32 device.
 5. Data will now stream to your dashboard in real-time!
 
+**Note:** Change the necessary components in the ino script mentioned by the comment involving wifi creds, deviceName and webhook url to actually test it in production.
 ---
 
 ## 🧠 Key Features

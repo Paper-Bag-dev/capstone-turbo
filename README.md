@@ -145,3 +145,4 @@ Feel free to open issues, fork, or contribute if this excites you!
   </tr>
 </table>
 
+Special Thanks to [@harsha123456543](https://github.com/harsha123456543) for hardware advice and lending us a helping hand in testing the ESP32 Module <3!

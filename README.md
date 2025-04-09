@@ -1,4 +1,4 @@
-# 🍃 Lichen Works — Forest Monitoring System
+# 🍃 Lichen Works — Forest Monitoring System with VOC Detection Capabilities
 
 For our final year capstone project, we built **Lichen Works**—a low-cost, data-aggregating forest monitoring system that detects VOCs (Volatile Organic Compounds) and provides insights via a full-stack SaaS platform. It merges **IoT**, **finetuned LLMs**, **Langflow**, **regression models**, and modern web technologies like **Next.js**, **Node.js (TypeScript)**, **Flask**, and **Docker**. Key services are hosted on **AWS EC2** and **GCP Compute Engine**, fully containerized and uploaded to **DockerHub**.
 

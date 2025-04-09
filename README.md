@@ -17,6 +17,9 @@ We blended recent trends in tech to create a working MVP aligned with **2025 sof
 **[Insert Demo Link Here]**  
 (We recommend watching this before diving into the code.)
 
+## Architecture
+![image](https://github.com/user-attachments/assets/cdc136e0-f15c-493e-8037-7fbd82df843c)
+
 ---
 
 ## 🌱 Motivation

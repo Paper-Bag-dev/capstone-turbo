@@ -141,7 +141,7 @@ Feel free to open issues, fork, or contribute if this excites you!
 <table>
   <tr>
     <td align="center"><a href="https://github.com/Paper-Bag-dev"><img src="https://avatars.githubusercontent.com/Paper-Bag-dev" width="100px;" alt=""/><br /><sub><b>Vikalp Sharma</b></sub></a><br /><sub>Fullstack & IOT Engineer</sub></td>
-    <td align="center"><a href="https://github.com/Vimall03"><img src="https://avatars.githubusercontent.com/Vimall03" width="100px;" alt=""/><br /><sub><b>Vimal M</b></sub></a><br /><sub>Langflow Engineer and Cloud deployment handler</sub></td>
+    <td align="center"><a href="https://github.com/Vimall03"><img src="https://avatars.githubusercontent.com/Vimall03" width="100px;" alt=""/><br /><sub><b>Vimal M</b></sub></a><br /><sub>AI and Cloud Engineer</sub></td>
     <td align="center"><a href="https://github.com/ayushnandi"><img src="https://avatars.githubusercontent.com/ayushnandi" width="100px;" alt=""/><br /><sub><b>Ayush Nandi</b></sub></a><br /><sub>Frontend Developer</sub></td>
     <td align="center"><a href="https://github.com/Abdev1205"><img src="https://avatars.githubusercontent.com/Abdev1205" width="100px;" alt=""/><br /><sub><b>Abhay Mishra</b></sub></a><br /><sub>Fullstack Developer & Webhook Developer</sub></td>
     <td align="center"><a href="https://github.com/DevangKapoor"><img src="https://avatars.githubusercontent.com/DevangKapoor" width="100px;" alt=""/><br /><sub><b>Devang Kapoor</b></sub></a><br /><sub>Fulltime game Dev & Parttime AI Enthusiast</sub></td>

@@ -12,7 +12,7 @@ We blended recent trends in tech to create a working MVP aligned with **2025 sof
 
 ---
 
-## 🎥 Demo Video
+## 🎥 Demo Video (Click On Image!)
 <a href="https://drive.google.com/file/d/1pTfxWmO4vhwvFLwC-RkALvH1_masovsA/view?usp=sharing" target="_blank">
   <img src="https://drive.google.com/thumbnail?id=1pTfxWmO4vhwvFLwC-RkALvH1_masovsA" alt="Demo Video Preview" width="600"/>
 </a>

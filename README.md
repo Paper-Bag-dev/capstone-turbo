@@ -12,13 +12,13 @@ We blended recent trends in tech to create a working MVP aligned with **2025 sof
 
 ---
 
+## Architecture
+![image](https://github.com/user-attachments/assets/e9db87e0-b677-43b2-8f78-1e20e1beb39d)
+
 ## 🎥 Demo Video (Click On Image!)
 <a href="https://drive.google.com/file/d/1pTfxWmO4vhwvFLwC-RkALvH1_masovsA/view?usp=sharing" target="_blank">
   <img src="https://drive.google.com/thumbnail?id=1pTfxWmO4vhwvFLwC-RkALvH1_masovsA" alt="Demo Video Preview" width="600"/>
 </a>
-
-## Architecture
-![image](https://github.com/user-attachments/assets/e9db87e0-b677-43b2-8f78-1e20e1beb39d)
 
 ---
 
